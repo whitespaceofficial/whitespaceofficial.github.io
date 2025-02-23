@@ -1,0 +1,25 @@
+.countdown-unit {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  .days {
+    font-family: 10px;
+  }
+  .hours {
+    font-family: 10px;
+  }
+  .minutes {
+    font-family: 10px;
+  }
+  .seconds {
+    font-family: 10px;
+  }
+  
+  .countdown-number {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  .countdown-unit {
+    font-size: 20px; /* Smaller size for the units (d, h, m, s) */
+  }
+  
