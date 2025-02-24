@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>whitespace &lt; news</title>
+
+    <!-- Site Wide CSS -->
+    <link rel="stylesheet" href="../res/css/common.css">
+    <link rel="stylesheet" href="../res/css/scanlines.css">
+    <link rel="stylesheet" href="../res/css/cursor.css">
+    <link rel="stylesheet" href="../res/css/scrollbars.css">
+    <link rel="stylesheet" href="../res/css/button.css">
+    <link rel="stylesheet" href="../res/css/countdown.css">
+
+    <!-- Site Wide JS -->
+    <script src="../res/js/pages/other/contact.js"></script>
+
+    <!-- Page Specific -->
+    <link rel="stylesheet" href="../res/css/pages/home/home.css">
+    
+    <style>
+        /* Ensure the html and body take full height */
+        html, body {
+            height: 100%;
+            margin: 0;
+            cursor: url(../res/img/ui/cursor.png), default;
+        }
+
+        a {
+            cursor: url(../res/img/ui/pointer.png), default;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* Use flexbox to center content */
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;  /* Centers vertically */
+            align-items: center;      /* Centers horizontally */
+            height: 100vh;            /* Takes up full viewport height */
+            margin: 0;                /* Removes default margin */
+            background-color: #000;
+            color: #FFF;
+            text-align: center;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1; /* This puts the canvas behind all other elements */
+            display: block;
+        }
+
+        h1 {
+            font-family: "Heading";
+            color: #FFF;
+        }
+
+        /* Your existing styles for normal links */
+        a {
+            font-family: "Gothic";
+            color: #FFF;
+            text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #FFF, 0 0 25px #FFF, 0 0 30px #FFF;
+        }
+
+        a:hover {
+            font-family: "Gothic";
+            background-color: #FFF;
+            color: #000;
+        }
+
+        /* Reset styles when <a> contains a button */
+        .button-link {
+            text-decoration: none;
+            background: none;
+            color: inherit;
+            font-family: inherit;
+        }
+
+        /* Prevent hover styles from affecting button links */
+        .button-link:hover {
+            background: none;
+            color: inherit;
+        }
+
+        .link {
+            border-bottom: 1px dotted;
+        }
+
+        p {
+            font-family: "Paragraph";
+            color: #FFF;
+            overflow-wrap: break-word;
+            white-space: normal;
+        }
+
+        .footer {
+            background-color: #000;
+            color: white;
+            text-align: center;
+            padding: -3px;
+            width: 95%;
+            /* Push footer to the bottom */
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <canvas data-starfield="500" data-color="white"></canvas>
+
+    <!-- FUCK HTML SPACING MAN -->
+    <br></br><br></br><br></br><br></br><br></br><br></br><br>
+
+    <h1 style="color: white; text-shadow: 0 0 50px #FFF, 0 0 30px #FFF; font-size: 35px;">whitespace &lt; contact</h1>
+    <p style="font-family: Paragraph; color: white; text-shadow: 0 0 50px #FFF, 0 0 30px #FFF; font-size: 15px;">Ways to contact The Representative of the Hoshi Project listed here.</p>
+    
+    <div class="link-container">
+        <a href="../index.html" class="link">Home</a>
+        <a href="pages/information/info.html" class="link">Information</a>
+        <a href="pages/news/news.html" class="link">News</a>
+        <a href="pages/about/about.html" class="link">About Me</a>
+        <a href="pages/compendium/compendium.html" class="link">Compendium</a>
+        <a href="https://discord.gg/uJgCVGgvch" class="link">Discord</a>
+    </div>   
+
+    <br></br>
+
+    <a href="discord://-/users/1325914437671981087" class="button-link">
+        <button class="button-big">
+            <img src="../res/img/icons/discord.png" alt="icon">
+            <div class="button-text">
+                <span class="main-text">Contact me through discord!</span>
+                <span class="sub-text">A Simple way to contact The Hoshi Representative is through discord! <span style="color: #FF0000;">Opens Discord!</span></span>
+            </div> 
+        </button>
+    </a>    
+    
+    <br>
+    
+    <a href="mailto:hoshiproject@proton.me" class="button-link">
+        <button class="button-big">
+            <img src="../res/img/icons/email.png" alt="icon">
+            <div class="button-text">
+                <span class="main-text">Send me a Email!</span>
+                <span class="sub-text">The simplest way without getting involved is just sending me an email! <span style="color: #FF0000;">hoshiproject@proton.me</span> is the only official Email.</span>
+            </div> 
+        </button>
+    </a> 
+
+    <br>
+
+    <a href="tox:872C48706D473572199E6AB8B7D5325F9E648E94805FD34D5264386736F4B67E5DB01C9E8980" class="button-link">
+        <button class="button-big">
+            <img src="../res/img/icons/tox.png" alt="icon">
+            <div class="button-text">
+                <span class="main-text">Contact me using Tox!</span>
+                <span class="sub-text">The easiest and most secure way to contact is using a Tox client. Click here to add me to your Tox client.</span>
+            </div> 
+        </button>
+    </a> 
+
+    <!-- Footer -->
+    <footer class="footer">
+        <canvas data-starfield="200" data-color="white"></canvas>
+        <p>copyright © hoshirep 2025-2026 <br>all Content is owned by its respective owners. <br style="color: red;">made with &lt;3 by HoshiRep<br></p>
+    </footer>
+
+    <script src="../res/js/starfield.js"></script>
+</body>
+</html>

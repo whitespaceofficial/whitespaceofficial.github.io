@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>whitespace &lt; aurora information</title>
+
+    <!-- Site Wide CSS -->
+    <link rel="stylesheet" href="../../../res/css/common.css">
+    <link rel="stylesheet" href="../../../res/css/scanlines.css">
+    <link rel="stylesheet" href="../../../res/css/cursor.css">
+    <link rel="stylesheet" href="../../../res/css/scrollbars.css">
+    <link rel="stylesheet" href="../../../res/css/countdown.css">
+
+    <!-- Site Wide JS -->
+    <script src="../../../res/js/pages/information/audio‑info.js"></script>
+
+    <!-- Page Specific -->
+    <link rel="stylesheet" href="../../../res/css/pages/home/home.css">
+    
+    <!-- Highlight.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/monokai.min.css">
+    
+    <style>
+        /* Ensure the html and body take full height */
+        html, body {
+            height: 100%;
+            margin: 0;
+            cursor: url(../../../res/img/ui/cursor.png), default;
+        }
+
+        a {
+            cursor: url(../../../res/img/ui/pointer.png), default;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* Use flexbox to center content */
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;  /* Centers vertically */
+            align-items: center;      /* Centers horizontally */
+            height: 100vh;            /* Takes up full viewport height */
+            margin: 0;                /* Removes default margin */
+            background-color: #000;
+            color: #FFF;
+            text-align: center;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1; /* This puts the canvas behind all other elements */
+            display: block;
+        }
+
+        h1 {
+            font-family: "Heading";
+            color: #FFF;
+        }
+
+        a {
+            font-family: "Gothic";
+            color: #FFF;
+            text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #FFF, 0 0 25px #FFF, 0 0 30px #FFF;
+        }
+
+        a:hover {
+            font-family: "Gothic";
+            background-color: #FFF;
+            color: #000;
+        }
+
+        .link {
+           border-bottom: 1px dotted;
+        }
+
+        p {
+            font-family: "Paragraph";
+            color: #FFF;
+            overflow-wrap: break-word;
+            white-space: normal;
+        }
+
+        /* Code block styling: increase container size without increasing font */
+        .code {
+            background-color: rgba(46,48,54,.3);
+            border: 1px solid rgba(46,48,54,.6);
+            font-family: monospace;
+            font-size: 12px;
+            padding: 40px; /* increased padding for larger container */
+            border-radius: 5px;
+            overflow-x: auto;
+            text-align: left;
+            width: 95%;
+            max-width: 1200px; /* increased max-width */
+            margin: 2em auto;
+            color: #ccc;
+        }
+
+        .footer {
+            background-color: #000;
+            color: white;
+            text-align: center;
+            padding: -3px;
+            width: 95%;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <canvas data-starfield="500" data-color="white"></canvas>
+
+    <!-- Spacing -->
+    <br><br><br><br><br><br><br>
+
+    <h1 style="color: white; text-shadow: 0 0 50px #FFF, 0 0 30px #FFF; font-size: 35px;">whitespace &lt; information</h1>
+    <p style="font-family: Paragraph; color: white; text-shadow: 0 0 50px #FFF, 0 0 30px #FFF; font-size: 15px;">
+        Here are some examples of how Aurora can be used in different programming languages to store data and avoid overuse (kinda like a killswitch).
+    </p>
+
+    <br></br>
+
+    <p style="text-align: left; margin: 0; padding: 0; left: 25%; font-family: monospace;">C# Example</p>
+
+    <!-- C# Code Example -->
+    <pre class="code"><code class="language-csharp">
+        
+
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace SynapseNetwork
+{
+    public class AuroraEventArgs : EventArgs
+    {
+        public int CurrentLevel { get; }
+        public string Message { get; }
+        public AuroraEventArgs(int currentLevel, string message)
+        {
+            CurrentLevel = currentLevel;
+            Message = message;
+        }
+    }
+
+    public sealed class AuroraManager
+    {
+        private static readonly Lazy&lt;AuroraManager&gt; lazy =
+            new Lazy&lt;AuroraManager&gt;(() =&gt; new AuroraManager());
+        public static AuroraManager Instance =&gt; lazy.Value;
+
+        private int _totalAurora;
+        private readonly object _lock = new object();
+
+        public event EventHandler&lt;AuroraEventArgs&gt; AuroraStatusChanged;
+
+        private AuroraManager()
+        {
+            _totalAurora = 1000;
+            StartPeriodicMonitoring();
+        }
+
+        public bool TryAllocate(int units)
+        {
+            lock (_lock)
+            {
+                if (units &lt;= 0 || units &gt; _totalAurora)
+                {
+                    OnAuroraStatusChanged(new AuroraEventArgs(_totalAurora, "Allocation failed."));
+                    return false;
+                }
+
+                _totalAurora -= units;
+                OnAuroraStatusChanged(new AuroraEventArgs(_totalAurora, $"{units} units allocated."));
+                return true;
+            }
+        }
+
+        public void Release(int units)
+        {
+            if (units &lt;= 0) return;
+            lock (_lock)
+            {
+                _totalAurora += units;
+                OnAuroraStatusChanged(new AuroraEventArgs(_totalAurora, $"{units} units released."));
+            }
+        }
+
+        private void OnAuroraStatusChanged(AuroraEventArgs e)
+        {
+            AuroraStatusChanged?.Invoke(this, e);
+        }
+
+        private void StartPeriodicMonitoring()
+        {
+            Task.Run(() =>
+            {
+                while (true)
+                {
+                    Thread.Sleep(5000);
+                    lock (_lock)
+                    {
+                        int recoveryUnits = 50;
+                        _totalAurora = Math.Min(_totalAurora + recoveryUnits, 1000);
+                        OnAuroraStatusChanged(new AuroraEventArgs(_totalAurora, "Periodic recovery."));
+                    }
+                }
+            });
+        }
+    }
+}
+    </code></pre>
+
+    <p>This version models Aurora as a resource managed by a singleton "AuroraManager" class. The manager tracks available units and permits or denies requests based on limits. <br> It uses events to notify systems when resource thresholds are met or exceeded, and a background thread simulates periodic checks to adjust allocations.</p>
+
+    <a class="link" href="javascript:history.back()">Go Back One</a>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <canvas data-starfield="200" data-color="white"></canvas>
+        <p>
+            copyright © hoshirep 2025-2026 <br>
+            all Content is owned by its respective owners. <br style="color: red;">
+            made with &lt;3 by HoshiRep<br>
+        </p>
+    </footer>
+
+    <!-- Starfield Script -->
+    <script src="../../../res/js/starfield.js"></script>
+</body>
+</html>
